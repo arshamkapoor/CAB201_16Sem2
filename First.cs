@@ -28,11 +28,7 @@ namespace First {
 			OutputResult(fCons);
 			DisplayMenu();
 			response = UserInput();
-			if (response == "Y" || response == "y") {
-            Main();
-			} else {
-			ExitProgram();
-			}//end Another calculation aka. 'haxy way to do another calculation'.
+			RepeatProgram(response);
         }//end Main
 
         static void WelcomeMessage() {
@@ -43,12 +39,12 @@ namespace First {
 			double aFuel; string fValue; bool badValue = true;
 			
 			do {
-				Console.Write("\nEnter amount of fuel used in litres (>= 20 litres): ");
+				Console.Write("\nEnter amount of fuel used in litres: ");
 				fValue = Console.ReadLine();
 				if ((double.TryParse(fValue, out aFuel)) && (aFuel >= 20)) {
 					badValue = false;
 				} else {
-					Console.WriteLine("\n {0} is below the minimum value of 20. \n\nPlease re-enter a number greater than or equal to 20", fValue);
+					Console.WriteLine("\n {0} is below the minimum value of 20. \n\nPlease re-enter a number greater than or equal to 20.", fValue);
 				}
 			}while ((badValue) || (aFuel < 20));
 			Console.WriteLine("\nYou input {0} litres", aFuel);
@@ -64,7 +60,7 @@ namespace First {
 				if ((double.TryParse(fValue, out aDist)) && (aDist >= rDist)) {
 					badValue = false;
 				} else {
-					Console.WriteLine("\n {0} is below the minimum value of {1}. \n\nPlease re-enter a number greater than or equal to {1}: ",fValue, rDist);
+					Console.WriteLine("\n {0} is below the minimum value of {1}. \n\nPlease re-enter a number greater than or equal to {1}. ",fValue, rDist);
 				}
 			}while ((badValue) || (aDist < (aFuel*8)));
 			Console.WriteLine("\nYou input {0} km\n", aDist);
@@ -79,7 +75,7 @@ namespace First {
 			double fMpg = 0.0;
 			double kmlToMpg = 282.48;
 			fMpg = Math.Round((kmlToMpg / fCons),2);
-			Console.WriteLine("Your fuel consumption is {0} l/100km \nwhich is equilivant to {1} mpg", fCons, fMpg);
+			Console.WriteLine("Your fuel consumption is {0} l/100km, \nwhich is equilivant to {1} mpg", fCons, fMpg);
         }//end OutputResult
 		
 		static void DisplayMenu() {
@@ -96,6 +92,14 @@ namespace First {
 		static void ExitProgram() {
 		Console.Write("\n\nPress any key to exit.");
 		Console.ReadLine();
+		}
+		
+		static void RepeatProgram(string answer){
+		if (answer == "Y" || answer == "y") {
+		Main();
+		} else {
+		ExitProgram();
+		}
 		}
     }
 }
